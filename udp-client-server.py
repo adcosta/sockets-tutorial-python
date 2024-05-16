@@ -31,8 +31,8 @@ def receive_message():
 message = ("HELLO!").encode('utf-8')
 send_thread = Thread(target=send_message, args=(message,))
 receive_thread = Thread(target=receive_message)
-send_thread.start()
 receive_thread.start()
+send_thread.start()
 
 # main thread waits for others to finish
 send_thread.join()
