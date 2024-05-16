@@ -2,6 +2,8 @@ import json
 import socket 
 import threading
 
+ip = 'localhost'
+port = 6667
 
 def handle_client(conn, address):
 	message = conn.recv(1024)
@@ -15,6 +17,7 @@ def server(server_address):
 	s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) 
 	s.bind(server_address)
 	s.listen(5)
+	print(f"Listening for connections on {server_address}...")
 	while True:
 		(conn, address) = s.accept()
 		print(f"Accepted new connection from {address}")
@@ -24,7 +27,7 @@ def server(server_address):
 
 def main():
 	try: 
-		server_address = ('localhost', 6667)
+		server_address = (ip, port)
 		server(server_address)
 	except KeyboardInterrupt: 
 		print(f"Keyboard interrupt")
